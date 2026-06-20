@@ -40,6 +40,10 @@ POST /analyze-playlist
 
 ## Optional Telegram Bot
 
+Cloud webhook deploy:
+
+See [docs/deploy.md](docs/deploy.md). This is the recommended mode when you do not want to run the bot locally.
+
 No-dependency runner:
 
 ```powershell
