@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import unittest
 
-from app.bot.simple_telegram_bot import analyze_text, split_command
+from app.bot.telegram_messages import analyze_text, build_reply, split_command
 
 
 class SimpleTelegramBotTests(unittest.TestCase):
@@ -13,6 +13,9 @@ class SimpleTelegramBotTests(unittest.TestCase):
         card = analyze_text("Linear Movement - The Game", as_json=False)
         self.assertIn("PLAYLIST SCORER AUDIT", card)
         self.assertTrue(card.endswith("END"))
+
+    def test_build_reply_handles_start(self) -> None:
+        self.assertIn("Playlist Scorer", build_reply("/start"))
 
 
 if __name__ == "__main__":
