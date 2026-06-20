@@ -13,6 +13,15 @@ The Telegram adapter is already implemented in `app/bot/telegram_bot.py`.
 
 ## Run Locally
 
+No-dependency runner:
+
+```powershell
+$env:TELEGRAM_BOT_TOKEN="PASTE_TOKEN_HERE"
+python -m app.bot.simple_telegram_bot
+```
+
+Optional `python-telegram-bot` adapter:
+
 ```powershell
 python -m pip install -e ".[telegram]"
 $env:TELEGRAM_BOT_TOKEN="PASTE_TOKEN_HERE"
