@@ -1,0 +1,72 @@
+[
+  {
+    "id": "linear_movement",
+    "canonical_name": "Linear Movement",
+    "aliases": [],
+    "countries": ["Belgium"],
+    "scenes": ["minimal_wave"],
+    "active_years": [1981, 1984],
+    "tags": ["minimal wave", "synth"],
+    "rarity": 0.76
+  },
+  {
+    "id": "absolute_body_control",
+    "canonical_name": "Absolute Body Control",
+    "aliases": ["ABC"],
+    "countries": ["Belgium"],
+    "scenes": ["minimal_wave"],
+    "active_years": [1980, 1984],
+    "tags": ["minimal wave", "electronic body music"],
+    "rarity": 0.67
+  },
+  {
+    "id": "the_neon_judgement",
+    "canonical_name": "The Neon Judgement",
+    "aliases": ["Neon Judgement"],
+    "countries": ["Belgium"],
+    "scenes": ["minimal_wave"],
+    "active_years": [1981, 1999],
+    "tags": ["minimal wave", "post-punk", "electronic body music"],
+    "rarity": 0.55
+  },
+  {
+    "id": "snowy_red",
+    "canonical_name": "Snowy Red",
+    "aliases": [],
+    "countries": ["Belgium"],
+    "scenes": ["minimal_wave"],
+    "active_years": [1980, 1989],
+    "tags": ["minimal wave", "coldwave"],
+    "rarity": 0.72
+  },
+  {
+    "id": "oppenheimer_analysis",
+    "canonical_name": "Oppenheimer Analysis",
+    "aliases": [],
+    "countries": ["United Kingdom"],
+    "scenes": ["minimal_wave"],
+    "active_years": [1981, 1983],
+    "tags": ["minimal wave", "synth"],
+    "rarity": 0.81
+  },
+  {
+    "id": "kraftwerk",
+    "canonical_name": "Kraftwerk",
+    "aliases": [],
+    "countries": ["Germany"],
+    "scenes": ["synthpop"],
+    "active_years": [1970, 2021],
+    "tags": ["synthpop", "electronic"],
+    "rarity": 0.18
+  },
+  {
+    "id": "molchat_doma",
+    "canonical_name": "Molchat Doma",
+    "aliases": ["Молчат Дома"],
+    "countries": ["Belarus"],
+    "scenes": ["coldwave_revival"],
+    "active_years": [2017, 2026],
+    "tags": ["post-punk", "coldwave", "darkwave"],
+    "rarity": 0.34
+  }
+]

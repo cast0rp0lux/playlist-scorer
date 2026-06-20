@@ -1,0 +1,8 @@
+{
+  "title_noise_patterns": [
+    "\\(.*?remaster.*?\\)",
+    "\\(.*?official video.*?\\)",
+    "\\[.*?\\]",
+    "-\\s*remastered.*$"
+  ]
+}

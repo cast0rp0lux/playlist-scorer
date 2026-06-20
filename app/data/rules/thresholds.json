@@ -1,0 +1,8 @@
+{
+  "metadata_error_confidence": 0.5,
+  "pure_pipeline_veto_flags": [
+    "is_live",
+    "is_remix",
+    "is_edit"
+  ]
+}

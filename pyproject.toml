@@ -1,0 +1,15 @@
+[project]
+name = "playlist-scorer"
+version = "0.1.0"
+description = "Deterministic curatorial playlist audit engine with Telegram and API adapters."
+requires-python = ">=3.11"
+dependencies = []
+
+[project.optional-dependencies]
+api = ["fastapi>=0.110", "uvicorn>=0.27"]
+telegram = ["python-telegram-bot>=21.0"]
+dev = ["pytest>=8.0"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]

@@ -1,0 +1,46 @@
+{
+  "genre": {
+    "scene_cohesion": 0.3,
+    "decade_purity": 0.25,
+    "country_cohesion": 0.15,
+    "rarity": 0.1,
+    "contamination_risk": 0.2
+  },
+  "rare": {
+    "scene_cohesion": 0.25,
+    "rarity": 0.3,
+    "discovery_score": 0.2,
+    "scene_density": 0.15,
+    "contamination_risk": 0.1
+  },
+  "discovery": {
+    "scene_cohesion": 0.2,
+    "rarity": 0.25,
+    "diversity": 0.2,
+    "discovery_score": 0.25,
+    "contamination_risk": 0.1
+  },
+  "scene": {
+    "scene_cohesion": 0.35,
+    "decade_purity": 0.25,
+    "country_cohesion": 0.15,
+    "rarity": 0.1,
+    "contamination_risk": 0.1,
+    "scene_gravity_loss": 0.05
+  },
+  "similar": {
+    "scene_cohesion": 0.3,
+    "diversity": 0.15,
+    "discovery_score": 0.15,
+    "scene_density": 0.25,
+    "contamination_risk": 0.15
+  },
+  "mix": {
+    "scene_cohesion": 0.2,
+    "diversity": 0.2,
+    "rarity": 0.1,
+    "contamination_risk": 0.1,
+    "scene_density": 0.2,
+    "discovery_score": 0.2
+  }
+}

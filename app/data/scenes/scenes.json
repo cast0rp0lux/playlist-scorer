@@ -1,0 +1,46 @@
+[
+  {
+    "id": "minimal_wave",
+    "name": "minimal wave",
+    "countries": ["Belgium", "Netherlands", "United Kingdom", "France", "Germany"],
+    "eras": ["1980s"],
+    "core_artists": ["linear_movement", "absolute_body_control", "snowy_red", "oppenheimer_analysis"],
+    "parent_scenes": ["post_punk", "synthpop"],
+    "child_scenes": ["coldwave_revival"],
+    "related_scenes": ["coldwave", "synthpop"],
+    "styles": ["minimal wave", "synth", "coldwave", "post-punk"]
+  },
+  {
+    "id": "synthpop",
+    "name": "synthpop",
+    "countries": ["Germany", "United Kingdom", "Japan", "United States"],
+    "eras": ["1970s", "1980s"],
+    "core_artists": ["kraftwerk"],
+    "parent_scenes": ["krautrock"],
+    "child_scenes": ["minimal_wave"],
+    "related_scenes": ["minimal_wave", "new_wave"],
+    "styles": ["synthpop", "electronic"]
+  },
+  {
+    "id": "coldwave_revival",
+    "name": "coldwave revival",
+    "countries": ["Belarus", "Russia", "Ukraine"],
+    "eras": ["2010s", "2020s"],
+    "core_artists": ["molchat_doma"],
+    "parent_scenes": ["minimal_wave", "coldwave"],
+    "child_scenes": [],
+    "related_scenes": ["minimal_wave"],
+    "styles": ["post-punk", "coldwave", "darkwave"]
+  },
+  {
+    "id": "post_punk",
+    "name": "post-punk",
+    "countries": ["United Kingdom", "United States"],
+    "eras": ["1970s", "1980s"],
+    "core_artists": [],
+    "parent_scenes": [],
+    "child_scenes": ["minimal_wave"],
+    "related_scenes": ["new_wave"],
+    "styles": ["post-punk", "new wave"]
+  }
+]
