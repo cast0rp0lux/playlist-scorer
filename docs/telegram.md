@@ -11,6 +11,12 @@ The Telegram adapter is already implemented in `app/bot/telegram_bot.py`.
 5. Choose a username ending in `bot`, for example `playlist_scorer_bot`.
 6. Copy the token that BotFather returns.
 
+## Run In Cloud
+
+Use the webhook API if you do not want the bot running on your computer.
+
+See [deploy.md](deploy.md).
+
 ## Run Locally
 
 No-dependency runner:
