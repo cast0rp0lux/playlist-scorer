@@ -3,12 +3,10 @@ from __future__ import annotations
 import json
 import os
 from typing import Any
+import urllib.error
 import urllib.request
 
-try:
-    from fastapi import FastAPI, Header, HTTPException
-except ImportError as exc:  # pragma: no cover - exercised only without optional deps
-    raise RuntimeError("Install API dependencies with: python -m pip install -e '.[api]'") from exc
+from fastapi import FastAPI, Header, HTTPException
 
 from app.bot.telegram_messages import build_reply
 from app.core.engine import analyze_playlist
@@ -38,7 +36,13 @@ def configure_telegram_webhook() -> None:
     payload: dict[str, str] = {"url": f"{public_base_url.rstrip('/')}/telegram/webhook"}
     if webhook_secret:
         payload["secret_token"] = webhook_secret
-    _telegram_call(token, "setWebhook", payload)
+    try:
+        _telegram_call(token, "setWebhook", payload)
+    except urllib.error.HTTPError as exc:
+        detail = exc.read().decode("utf-8", errors="replace")
+        print(f"Telegram webhook registration warning: HTTP {exc.code}: {detail}")
+    except urllib.error.URLError as exc:
+        print(f"Telegram webhook registration warning: {exc}")
 
 
 @app.post("/analyze-playlist")
