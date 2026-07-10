@@ -10,4 +10,4 @@ COPY app ./app
 
 RUN pip install --no-cache-dir -e ".[api]"
 
-CMD ["sh", "-c", "python -m uvicorn app.api.main:app --host 0.0.0.0 --port ${PORT:-8000}"]
+CMD ["python", "-m", "app.api.serve"]
