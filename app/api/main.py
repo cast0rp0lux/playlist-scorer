@@ -3,14 +3,13 @@ from __future__ import annotations
 import json
 import os
 from typing import Any
+import urllib.error
 import urllib.request
 
-try:
-    from fastapi import FastAPI, Header, HTTPException
-except ImportError as exc:  # pragma: no cover - exercised only without optional deps
-    raise RuntimeError("Install API dependencies with: python -m pip install -e '.[api]'") from exc
+from fastapi import FastAPI, Header, HTTPException
 
 from app.bot.telegram_messages import build_reply
+from app.api.telegram_security import is_valid_webhook_secret
 from app.core.engine import analyze_playlist
 from app.core.ingestion.parser import parse_input
 from app.core.version import VERSION_INFO
@@ -34,11 +33,30 @@ def configure_telegram_webhook() -> None:
     public_base_url = os.environ.get("PUBLIC_BASE_URL")
     if not token or not public_base_url:
         return
-    webhook_secret = os.environ.get("TELEGRAM_WEBHOOK_SECRET")
+    webhook_secret = _get_telegram_webhook_secret()
     payload: dict[str, str] = {"url": f"{public_base_url.rstrip('/')}/telegram/webhook"}
     if webhook_secret:
         payload["secret_token"] = webhook_secret
-    _telegram_call(token, "setWebhook", payload)
+    try:
+        _telegram_call(token, "setWebhook", payload)
+    except urllib.error.HTTPError as exc:
+        detail = exc.read().decode("utf-8", errors="replace")
+        print(f"Telegram webhook registration warning: HTTP {exc.code}: {detail}")
+    except urllib.error.URLError as exc:
+        print(f"Telegram webhook registration warning: {exc}")
+
+
+def _get_telegram_webhook_secret() -> str | None:
+    webhook_secret = os.environ.get("TELEGRAM_WEBHOOK_SECRET")
+    if not webhook_secret:
+        return None
+    if is_valid_webhook_secret(webhook_secret):
+        return webhook_secret
+    print(
+        "Telegram webhook secret warning: TELEGRAM_WEBHOOK_SECRET must be 1-256 "
+        "characters using only A-Z, a-z, 0-9, underscore, or hyphen; ignoring invalid secret."
+    )
+    return None
 
 
 @app.post("/analyze-playlist")
@@ -63,7 +81,7 @@ def telegram_webhook(
     update: dict[str, Any],
     x_telegram_bot_api_secret_token: str | None = Header(default=None),
 ) -> dict[str, bool]:
-    expected_secret = os.environ.get("TELEGRAM_WEBHOOK_SECRET")
+    expected_secret = _get_telegram_webhook_secret()
     if expected_secret and x_telegram_bot_api_secret_token != expected_secret:
         raise HTTPException(status_code=403, detail="Invalid Telegram webhook secret.")
 

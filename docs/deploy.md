@@ -7,7 +7,7 @@ Playlist Scorer can run as a Telegram webhook service. In this mode your compute
 Set these in the hosting provider:
 
 - `TELEGRAM_BOT_TOKEN`: token from `@BotFather`.
-- `TELEGRAM_WEBHOOK_SECRET`: random secret used to verify Telegram webhook calls.
+- `TELEGRAM_WEBHOOK_SECRET`: random secret used to verify Telegram webhook calls. Telegram allows 1-256 characters using only `A-Z`, `a-z`, `0-9`, `_`, and `-`.
 - `PUBLIC_BASE_URL`: public HTTPS URL of the deployed service, for example `https://playlist-scorer.onrender.com`.
 
 On startup, the API registers:
