@@ -8,6 +8,7 @@ import urllib.request
 
 from fastapi import FastAPI, Header, HTTPException
 
+from app.bot.telegram_chunks import split_telegram_message
 from app.bot.telegram_messages import build_reply
 from app.api.telegram_security import is_valid_webhook_secret
 from app.core.engine import analyze_playlist
@@ -95,8 +96,8 @@ def telegram_webhook(
 
     chat_id = int(message["chat"]["id"])
     reply = build_reply(str(message["text"]))
-    for chunk_start in range(0, len(reply), 3900):
-        _telegram_call(token, "sendMessage", {"chat_id": chat_id, "text": reply[chunk_start : chunk_start + 3900]})
+    for chunk in split_telegram_message(reply):
+        _telegram_call(token, "sendMessage", {"chat_id": chat_id, "text": chunk})
     return {"ok": True}
 
 

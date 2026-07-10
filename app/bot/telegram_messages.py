@@ -4,7 +4,7 @@ import json
 
 from app.core.engine import analyze_playlist
 from app.core.ingestion.parser import parse_input
-from app.core.output.card import render_curatorial_card
+from app.core.models import AuditResult
 from app.core.version import VERSION_INFO
 
 
@@ -58,4 +58,36 @@ def analyze_text(text: str, *, as_json: bool) -> str:
     result = analyze_playlist(request)
     if as_json:
         return json.dumps(result.to_dict(), ensure_ascii=False, indent=2)
-    return render_curatorial_card(result)
+    return render_telegram_card(result)
+
+
+def render_telegram_card(result: AuditResult) -> str:
+    counts = result.debug_info.get("classification_counts", {})
+    count_text = ", ".join(f"{name}: {count}" for name, count in counts.items()) or "none"
+    lines = [
+        "PLAYLIST SCORER AUDIT",
+        "",
+        f"Playlist: {result.playlist.name}",
+        f"Tracks: {len(result.tracks)}",
+        f"Final score: {result.metrics.final_score:.2f}",
+        f"Verdict: {result.verdict}",
+        "",
+        "SUMMARY",
+        f"Classifications: {count_text}",
+        f"Scene cohesion: {result.metrics.scene_cohesion:.2f}",
+        f"Country cohesion: {result.metrics.country_cohesion:.2f}",
+        f"Discovery score: {result.metrics.discovery_score:.2f}",
+        f"Contamination risk: {result.metrics.contamination_risk:.2f}",
+        "",
+        "TRACKS",
+    ]
+    for track in result.tracks:
+        country = track.country or "unknown country"
+        flags = f" [{', '.join(track.flags)}]" if track.flags else ""
+        lines.append(f"- {track.artist} - {track.title}: {track.classification.value}, {country}{flags}")
+    if result.warnings:
+        lines.extend(["", "WARNINGS"] + result.warnings[:10])
+        if len(result.warnings) > 10:
+            lines.append(f"...and {len(result.warnings) - 10} more warnings")
+    lines.append("END")
+    return "\n".join(lines)

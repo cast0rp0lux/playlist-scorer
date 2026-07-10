@@ -7,6 +7,7 @@ import urllib.error
 import urllib.request
 from typing import Any
 
+from app.bot.telegram_chunks import split_telegram_message
 from app.bot.telegram_messages import build_reply
 
 
@@ -24,8 +25,8 @@ class TelegramClient:
             return json.loads(response.read().decode("utf-8"))
 
     def send_message(self, chat_id: int, text: str) -> None:
-        for chunk_start in range(0, len(text), 3900):
-            self.call("sendMessage", {"chat_id": chat_id, "text": text[chunk_start : chunk_start + 3900]})
+        for chunk in split_telegram_message(text):
+            self.call("sendMessage", {"chat_id": chat_id, "text": chunk})
 
 
 def main() -> None:
